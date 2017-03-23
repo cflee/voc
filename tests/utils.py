@@ -592,9 +592,8 @@ class NotImplementedToExpectedFailure:
         if self._testMethodName in getattr(self, 'not_implemented', []):
             # Mark 'expecting failure' on class. It will only be applicable
             # for this specific run.
-            def wrapper(*args, **kwargs):
-                return getattr(self, self._testMethodName)(*args, **kwargs)
-
+            method = getattr(self, self._testMethodName)
+            wrapper = lambda *args, **kwargs: method(*args, **kwargs)  # noqa: E731
             wrapper.__unittest_expecting_failure__ = True
             setattr(self, self._testMethodName, wrapper)
         return super().run(result=result)
