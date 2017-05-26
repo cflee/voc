@@ -1,7 +1,5 @@
 package org.python.types;
 
-import org.Python;
-
 public class NoneType extends org.python.types.Object {
     public static org.python.Object NONE = new org.python.types.NoneType();
     public static final java.lang.String PYTHON_TYPE_NAME = "NoneType";

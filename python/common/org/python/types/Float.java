@@ -420,7 +420,7 @@ public class Float extends org.python.types.Object {
     @org.python.Method(
             __doc__ = "",
             args = {"other"},
-            default_args =  {"modulo"}
+            default_args = {"modulo"}
     )
     public org.python.Object __pow__(org.python.Object other, org.python.Object modulo) {
         if (modulo != null) {

@@ -302,8 +302,8 @@ public class Set extends org.python.types.Object {
     }
 
     @org.python.Method(
-        __doc__ = "",
-        args = {"other"}
+            __doc__ = "",
+            args = {"other"}
     )
     public org.python.Object __xor__(org.python.Object other) {
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
