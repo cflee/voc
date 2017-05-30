@@ -388,7 +388,7 @@ public class Bool extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __radd__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__radd__() has not been implemented.");
+        return __add__(other);
     }
 
     @org.python.Method(
@@ -396,7 +396,12 @@ public class Bool extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rsub__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__rsub__() has not been implemented.");
+        // Hack: delegate back to Bool/Int, as this shouldn't be called with a Bool/Int other param
+        // in practice anyway outside of the voc test suite
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Int) {
+            return other.__sub__(this);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -404,7 +409,7 @@ public class Bool extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rmul__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__rmul__() has not been implemented.");
+        return __mul__(other);
     }
 
     @org.python.Method(
@@ -412,7 +417,12 @@ public class Bool extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rtruediv__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__rtruediv__() has not been implemented.");
+        // Hack: delegate back to Bool/Int, as this shouldn't be called with a Bool/Int other param
+        // in practice anyway outside of the voc test suite
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Int) {
+            return other.__truediv__(this);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -420,7 +430,12 @@ public class Bool extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rfloordiv__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__rfloordiv__() has not been implemented.");
+        // Hack: delegate back to Bool/Int, as this shouldn't be called with a Bool/Int other param
+        // in practice anyway outside of the voc test suite
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Int) {
+            return other.__floordiv__(this);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -428,14 +443,19 @@ public class Bool extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rmod__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__rmod__() has not been implemented.");
+        // Hack: delegate back to Bool/Int, as this shouldn't be called with a Bool/Int other param
+        // in practice anyway outside of the voc test suite
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Int) {
+            return other.__mod__(this);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
             __doc__ = ""
     )
     public org.python.Object __rdivmod__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__rdivmod__() has not been implemented.");
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -443,7 +463,12 @@ public class Bool extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rpow__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__rpow__() has not been implemented.");
+        // Hack: delegate back to Bool/Int, as this shouldn't be called with a Bool/Int other param
+        // in practice anyway outside of the voc test suite
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Int) {
+            return other.__pow__(this, null);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -451,7 +476,12 @@ public class Bool extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rlshift__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__rlshift__() has not been implemented.");
+        // Hack: delegate back to Bool/Int, as this shouldn't be called with a Bool/Int other param
+        // in practice anyway outside of the voc test suite
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Int) {
+            return other.__lshift__(this);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -459,7 +489,12 @@ public class Bool extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rrshift__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__rrshift__() has not been implemented.");
+        // Hack: delegate back to Bool/Int, as this shouldn't be called with a Bool/Int other param
+        // in practice anyway outside of the voc test suite
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Int) {
+            return other.__rshift__(this);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -467,7 +502,7 @@ public class Bool extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rand__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__rand__() has not been implemented.");
+        return __and__(other);
     }
 
     @org.python.Method(
@@ -475,7 +510,7 @@ public class Bool extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rxor__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__rxor__() has not been implemented.");
+        return __xor__(other);
     }
 
     @org.python.Method(
@@ -483,7 +518,7 @@ public class Bool extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __ror__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__ror__() has not been implemented.");
+        return __or__(other);
 
     }
 

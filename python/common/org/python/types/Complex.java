@@ -513,7 +513,7 @@ public class Complex extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __radd__(org.python.Object other) {
-        return this.__add__(other);
+        return __add__(other);
     }
 
     @org.python.Method(
@@ -521,7 +521,7 @@ public class Complex extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rsub__(org.python.Object other) {
-        return this.__neg__().__add__(other);
+        return __neg__().__add__(other);
     }
 
     @org.python.Method(
@@ -529,7 +529,7 @@ public class Complex extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rmul__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("complex.__rmul__() has not been implemented.");
+        return __mul__(other);
     }
 
     @org.python.Method(
@@ -537,7 +537,21 @@ public class Complex extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rtruediv__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("complex.__rtruediv__() has not been implemented.");
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Complex
+                || other instanceof org.python.types.Float || other instanceof org.python.types.Int) {
+            org.python.types.Complex other_val = new org.python.types.Complex(0.0);
+            if (other instanceof org.python.types.Bool) {
+                other_val = new org.python.types.Complex((((org.python.types.Bool) other).value ? 1.0 : 0.0), 0.0);
+            } else if (other instanceof org.python.types.Complex) {
+                other_val = (org.python.types.Complex) other;
+            } else if (other instanceof org.python.types.Float) {
+                other_val = new org.python.types.Complex(((org.python.types.Float) other).value, 0.0);
+            } else if (other instanceof org.python.types.Int) {
+                other_val = new org.python.types.Complex(((org.python.types.Int) other).value, 0.0);
+            }
+            return other_val.__truediv__(this);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -545,7 +559,7 @@ public class Complex extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rfloordiv__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("complex.__rfloordiv__() has not been implemented.");
+        throw new org.python.exceptions.TypeError("can't take floor of complex number.");
     }
 
     @org.python.Method(
@@ -553,7 +567,7 @@ public class Complex extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rmod__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("complex.__rmod__() has not been implemented.");
+        throw new org.python.exceptions.TypeError("can't mod complex numbers.");
     }
 
     @org.python.Method(
@@ -568,7 +582,21 @@ public class Complex extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rpow__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("complex.__rpow__() has not been implemented.");
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Complex
+                || other instanceof org.python.types.Float || other instanceof org.python.types.Int) {
+            org.python.types.Complex other_val = new org.python.types.Complex(0.0);
+            if (other instanceof org.python.types.Bool) {
+                other_val = new org.python.types.Complex((((org.python.types.Bool) other).value ? 1.0 : 0.0), 0.0);
+            } else if (other instanceof org.python.types.Complex) {
+                other_val = (org.python.types.Complex) other;
+            } else if (other instanceof org.python.types.Float) {
+                other_val = new org.python.types.Complex(((org.python.types.Float) other).value, 0.0);
+            } else if (other instanceof org.python.types.Int) {
+                other_val = new org.python.types.Complex(((org.python.types.Int) other).value, 0.0);
+            }
+            return other_val.__pow__(this, null);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(

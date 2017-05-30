@@ -465,7 +465,7 @@ public class Float extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __radd__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("float.__radd__() has not been implemented.");
+        return __add__(other);
     }
 
     @org.python.Method(
@@ -473,7 +473,19 @@ public class Float extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rsub__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("float.__rsub__() has not been implemented.");
+        if (other instanceof org.python.types.Int) {
+            double other_val = ((org.python.types.Int) other).value;
+            return new org.python.types.Float(other_val - this.value);
+        } else if (other instanceof org.python.types.Float) {
+            double other_val = ((org.python.types.Float) other).value;
+            return new org.python.types.Float(other_val - this.value);
+        } else if (other instanceof org.python.types.Bool) {
+            if (((org.python.types.Bool) other).value) {
+                return new org.python.types.Float(1.0 - this.value);
+            }
+            return new org.python.types.Float(0.0 - this.value);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -481,7 +493,7 @@ public class Float extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rmul__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("float.__rmul__() has not been implemented.");
+        return __mul__(other);
     }
 
     @org.python.Method(
@@ -489,7 +501,22 @@ public class Float extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rtruediv__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("float.__rtruediv__() has not been implemented.");
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Int
+                || other instanceof org.python.types.Float) {
+            if (this.value == 0.0) {
+                throw new org.python.exceptions.ZeroDivisionError("float division by zero");
+            }
+            double other_val = 0.0;
+            if (other instanceof org.python.types.Bool) {
+                other_val = ((org.python.types.Bool) other).value ? 1.0 : 0.0;
+            } else if (other instanceof org.python.types.Int) {
+                other_val = ((org.python.types.Int) other).value;
+            } else if (other instanceof org.python.types.Float) {
+                other_val = ((org.python.types.Float) other).value;
+            }
+            return new org.python.types.Float(other_val / this.value);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -497,7 +524,22 @@ public class Float extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rfloordiv__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("float.__rfloordiv__() has not been implemented.");
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Int
+                || other instanceof org.python.types.Float) {
+            if (this.value == 0.0) {
+                throw new org.python.exceptions.ZeroDivisionError("float divmod()");
+            }
+            double other_val = 0.0;
+            if (other instanceof org.python.types.Bool) {
+                other_val = ((org.python.types.Bool) other).value ? 1.0 : 0.0;
+            } else if (other instanceof org.python.types.Int) {
+                other_val = ((org.python.types.Int) other).value;
+            } else if (other instanceof org.python.types.Float) {
+                other_val = ((org.python.types.Float) other).value;
+            }
+            return new org.python.types.Float(Math.floor(other_val / this.value));
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -505,7 +547,22 @@ public class Float extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rmod__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("float.__rmod__() has not been implemented.");
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Int
+                || other instanceof org.python.types.Float) {
+            if (this.value == 0.0) {
+                throw new org.python.exceptions.ZeroDivisionError("float modulo");
+            }
+            double other_val = 0.0;
+            if (other instanceof org.python.types.Bool) {
+                other_val = ((org.python.types.Bool) other).value ? 1.0 : 0.0;
+            } else if (other instanceof org.python.types.Int) {
+                other_val = ((org.python.types.Int) other).value;
+            } else if (other instanceof org.python.types.Float) {
+                other_val = ((org.python.types.Float) other).value;
+            }
+            return new org.python.types.Float(((other_val % this.value) + this.value) % this.value);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -520,7 +577,19 @@ public class Float extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rpow__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("float.__rpow__() has not been implemented.");
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Int
+                || other instanceof org.python.types.Float) {
+            double other_value = 0.0;
+            if (other instanceof org.python.types.Bool) {
+                other_value = ((org.python.types.Bool) other).value ? 1.0 : 0.0;
+            } else if (other instanceof org.python.types.Int) {
+                other_value = ((org.python.types.Int) other).value;
+            } else if (other instanceof org.python.types.Float) {
+                other_value = ((org.python.types.Float) other).value;
+            }
+            return new org.python.types.Float(other_value).__pow__(this, null);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(

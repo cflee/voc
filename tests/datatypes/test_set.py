@@ -402,6 +402,9 @@ class BinarySetOperationTests(BinaryOperationTestCase, TranspileTestCase):
         'test_direct_xor_frozenset',
         'test_direct_xor_set',
 
+        'test_direct_rxor_frozenset',
+        'test_direct_rxor_set',
+
         'test_lshift_class',
         'test_lshift_frozenset',
 

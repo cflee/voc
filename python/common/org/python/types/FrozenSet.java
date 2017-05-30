@@ -306,6 +306,55 @@ public class FrozenSet extends org.python.types.Object {
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
+    @org.python.Method(
+            __doc__ = "",
+            args = {"other"}
+    )
+    public org.python.Object __rsub__(org.python.Object other) {
+        // Hack: delegate back to Set as this needs to return a Set, not a Frozenset,
+        // unless it's a Frozenset, then we just delegate to __sub__()
+        if (other instanceof org.python.types.Set || other instanceof org.python.types.FrozenSet) {
+            return other.__sub__(this);
+        }
+        return __sub__(other);
+    }
+
+    @org.python.Method(
+            __doc__ = "",
+            args = {"other"}
+    )
+    public org.python.Object __rand__(org.python.Object other) {
+        // Hack: delegate back to Set as this needs to return a Set, not a Frozenset
+        if (other instanceof org.python.types.Set) {
+            return other.__and__(this);
+        }
+        return __and__(other);
+    }
+
+    @org.python.Method(
+            __doc__ = "",
+            args = {"other"}
+    )
+    public org.python.Object __ror__(org.python.Object other) {
+        // Hack: delegate back to Set as this needs to return a Set, not a Frozenset
+        if (other instanceof org.python.types.Set) {
+            return other.__or__(this);
+        }
+        return __or__(other);
+    }
+
+    @org.python.Method(
+            __doc__ = "",
+            args = {"other"}
+    )
+    public org.python.Object __rxor__(org.python.Object other) {
+        // Hack: delegate back to Set as this needs to return a Set, not a Frozenset
+        if (other instanceof org.python.types.Set) {
+            return other.__xor__(this);
+        }
+        return __xor__(other);
+    }
+
     private java.util.Set iterToSet(org.python.Object iterable) {
         org.python.Iterable iterator = iterable.__iter__();
         java.util.Set<org.python.Object> set = new java.util.HashSet<org.python.Object>();

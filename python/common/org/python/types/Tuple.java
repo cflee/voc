@@ -413,7 +413,10 @@ public class Tuple extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rmul__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("__rmul__() has not been implemented.");
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Int) {
+            return __mul__(other);
+        }
+        throw new org.python.exceptions.TypeError("'" + other.typeName() + "' object cannot be interpreted as an integer");
     }
 
     @org.python.Method(

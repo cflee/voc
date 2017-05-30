@@ -450,7 +450,7 @@ public class Str extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rmul__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("__rmul__() has not been implemented.");
+        return __mul__(other);
     }
 
     @org.python.Method(
@@ -458,7 +458,7 @@ public class Str extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rmod__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("__rmod__() has not been implemented.");
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(

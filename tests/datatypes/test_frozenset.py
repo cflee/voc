@@ -441,6 +441,8 @@ class BinaryFrozensetOperationTests(BinaryOperationTestCase, TranspileTestCase):
         'test_direct_gt_str',
         'test_direct_gt_tuple',
 
+        'test_direct_rxor_set',
+
         'test_floor_divide_bool',
         'test_floor_divide_bytearray',
         'test_floor_divide_bytes',

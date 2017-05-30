@@ -778,6 +778,8 @@ class BinaryStrOperationTests(BinaryOperationTestCase, TranspileTestCase):
         'test_direct_modulo_str',
         'test_direct_modulo_tuple',
 
+        'test_direct_rmodulo_str',
+
         'test_modulo_bool',
         'test_modulo_bytes',
         'test_modulo_bytearray',

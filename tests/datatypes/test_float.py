@@ -128,6 +128,9 @@ class BinaryFloatOperationTests(BinaryOperationTestCase, TranspileTestCase):
         'test_direct_lt_frozenset',
         'test_direct_ne_frozenset',
 
+        'test_direct_rpower_int',
+        'test_direct_rpower_float',
+
         'test_eq_frozenset',
 
         'test_ge_frozenset',

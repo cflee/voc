@@ -583,6 +583,18 @@ public class ByteArray extends org.python.types.Object {
     }
 
     @org.python.Method(
+            __doc__ = "",
+            args = {"other"}
+    )
+    public org.python.Object __rmul__(org.python.Object other) {
+        if (other instanceof org.python.types.Bool || other instanceof org.python.types.Int) {
+            return __mul__(other);
+        } else {
+            throw new org.python.exceptions.TypeError("'" + other.typeName() + "' object cannot be interpreted as an integer");
+        }
+    }
+
+    @org.python.Method(
             __doc__ = ""
     )
     public org.python.Object __contains__(java.util.List<org.python.Object> args, java.util.Map<java.lang.String, org.python.Object> kwargs, java.util.List<org.python.Object> default_args, java.util.Map<java.lang.String, org.python.Object> default_kwargs) {
@@ -634,13 +646,6 @@ public class ByteArray extends org.python.types.Object {
     )
     public org.python.Object __reduce_ex__(java.util.List<org.python.Object> args, java.util.Map<java.lang.String, org.python.Object> kwargs, java.util.List<org.python.Object> default_args, java.util.Map<java.lang.String, org.python.Object> default_kwargs) {
         throw new org.python.exceptions.NotImplementedError("bytearray.__reduce_ex__ has not been implemented.");
-    }
-
-    @org.python.Method(
-            __doc__ = ""
-    )
-    public org.python.Object __rmul__(java.util.List<org.python.Object> args, java.util.Map<java.lang.String, org.python.Object> kwargs, java.util.List<org.python.Object> default_args, java.util.Map<java.lang.String, org.python.Object> default_kwargs) {
-        throw new org.python.exceptions.NotImplementedError("bytearray.__rmul__ has not been implemented.");
     }
 
     @org.python.Method(

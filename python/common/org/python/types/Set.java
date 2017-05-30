@@ -325,33 +325,54 @@ public class Set extends org.python.types.Object {
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
-    // @org.python.Method(
-    //     __doc__ = ""
-    // )
-    // public org.python.Object __rsub__(org.python.Object other) {
-    //     throw new org.python.exceptions.NotImplementedError("__rsub__() has not been implemented");
-    // }
+    @org.python.Method(
+            __doc__ = "",
+            args = {"other"}
+    )
+    public org.python.Object __rsub__(org.python.Object other) {
+        // Hack: delegate back to FrozenSet as this needs to return a FroozenSet, not a Set
+        // unless it's a Set, then we just delegate to __sub__()
+        if (other instanceof org.python.types.FrozenSet || other instanceof org.python.types.Set) {
+            return other.__sub__(this);
+        }
+        return __sub__(other);
+    }
 
-    // @org.python.Method(
-    //     __doc__ = ""
-    // )
-    // public org.python.Object __rand__(org.python.Object other) {
-    //     throw new org.python.exceptions.NotImplementedError("__rand__() has not been implemented");
-    // }
+    @org.python.Method(
+            __doc__ = "",
+            args = {"other"}
+    )
+    public org.python.Object __rand__(org.python.Object other) {
+        // Hack: delegate back to FrozenSet as this needs to return a FroozenSet, not a Set
+        if (other instanceof org.python.types.FrozenSet) {
+            return other.__and__(this);
+        }
+        return __and__(other);
+    }
 
-    // @org.python.Method(
-    //     __doc__ = ""
-    // )
-    // public org.python.Object __rxor__(org.python.Object other) {
-    //     throw new org.python.exceptions.NotImplementedError("__rxor__() has not been implemented");
-    // }
+    @org.python.Method(
+            __doc__ = "",
+            args = {"other"}
+    )
+    public org.python.Object __rxor__(org.python.Object other) {
+        // Hack: delegate back to FrozenSet as this needs to return a FroozenSet, not a Set
+        if (other instanceof org.python.types.FrozenSet) {
+            return other.__xor__(this);
+        }
+        return __xor__(other);
+    }
 
-    // @org.python.Method(
-    //     __doc__ = ""
-    // )
-    // public org.python.Object __ror__(org.python.Object other) {
-    //     throw new org.python.exceptions.NotImplementedError("__ror__() has not been implemented");
-    // }
+    @org.python.Method(
+            __doc__ = "",
+            args = {"other"}
+    )
+    public org.python.Object __ror__(org.python.Object other) {
+        // Hack: delegate back to FrozenSet as this needs to return a FroozenSet, not a Set
+        if (other instanceof org.python.types.FrozenSet) {
+            return other.__or__(this);
+        }
+        return __or__(other);
+    }
 
     // @org.python.Method(
     //     __doc__ = ""

@@ -494,7 +494,7 @@ public class Int extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __radd__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("int.__radd__() has not been implemented");
+        return __add__(other);
     }
 
     @org.python.Method(
@@ -502,7 +502,12 @@ public class Int extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rsub__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("int.__rsub__() has not been implemented");
+        if (other instanceof org.python.types.Bool) {
+            return new org.python.types.Int(((org.python.types.Bool) other).value ? 1 : 0).__sub__(this);
+        } else if (other instanceof org.python.types.Int) {
+            return other.__sub__(this);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -510,7 +515,7 @@ public class Int extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rmul__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("int.__rmul__() has not been implemented");
+        return __mul__(other);
     }
 
     @org.python.Method(
@@ -518,7 +523,12 @@ public class Int extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rtruediv__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("int.__rtruediv__() has not been implemented");
+        if (other instanceof org.python.types.Bool) {
+            return new org.python.types.Int(((org.python.types.Bool) other).value ? 1 : 0).__truediv__(this);
+        } else if (other instanceof org.python.types.Int) {
+            return other.__truediv__(this);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -526,7 +536,12 @@ public class Int extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rfloordiv__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("int.__rfloordiv__() has not been implemented");
+        if (other instanceof org.python.types.Int) {
+            return other.__floordiv__(this);
+        } else if (other instanceof org.python.types.Bool) {
+            return new org.python.types.Int(((org.python.types.Bool) other).value ? 1 : 0).__floordiv__(this);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -534,7 +549,13 @@ public class Int extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rmod__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("int.__rmod__() has not been implemented");
+        if (other instanceof org.python.types.Int) {
+            return other.__mod__(this);
+        } else if (other instanceof org.python.types.Bool) {
+            // Bool has the complicated __mod__() logic on when to return Bool and when to return Int
+            return other.__mod__(this);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -549,7 +570,12 @@ public class Int extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rpow__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("int.__rpow__() has not been implemented");
+        if (other instanceof org.python.types.Bool) {
+            return new org.python.types.Int(((org.python.types.Bool) other).value ? 1 : 0).__pow__(this, null);
+        } else if (other instanceof org.python.types.Int) {
+            return other.__pow__(this, null);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -557,6 +583,11 @@ public class Int extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rlshift__(org.python.Object other) {
+        if (other instanceof org.python.types.Int) {
+            return other.__lshift__(this);
+        } else if (other instanceof org.python.types.Bool) {
+            return new org.python.types.Int(((org.python.types.Bool) other).value ? 1 : 0).__lshift__(this);
+        }
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
@@ -565,7 +596,12 @@ public class Int extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rrshift__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("int.__rrshift__() has not been implemented");
+        if (other instanceof org.python.types.Int) {
+            return other.__rshift__(this);
+        } else if (other instanceof org.python.types.Bool) {
+            return new org.python.types.Int(((org.python.types.Bool) other).value ? 1 : 0).__rshift__(this);
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(
@@ -573,7 +609,7 @@ public class Int extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rand__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("int.__rand__() has not been implemented");
+        return __and__(other);
     }
 
     @org.python.Method(
@@ -581,7 +617,7 @@ public class Int extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __rxor__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("int.__rxor__() has not been implemented");
+        return __xor__(other);
     }
 
     @org.python.Method(
@@ -589,7 +625,7 @@ public class Int extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __ror__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("int.__ror__() has not been implemented");
+        return __or__(other);
     }
 
     @org.python.Method(
